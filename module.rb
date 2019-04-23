@@ -1,3 +1,4 @@
+#module.rb
 module Zodiac
   def self.get_czodiac(year)
     chinese = [[1909, "Rooster"], [1910, "Dog"],
@@ -24,7 +25,7 @@ module Zodiac
     return arr[0], arr[1], arr[2]
   end
 
-  def self.get_wzodiac(year)
+  def self.get_wzodiac(date, month, year)
     zodiac = DateTime.new(year, month, date).zodiac_sign.to_s
     return zodiac
   end
