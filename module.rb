@@ -2,6 +2,7 @@
 module Zodiac
 
   ##take date,month,year as arg and return western zodiac(String)
+  #require zodiac gem
   def self.get_wzodiac(date, month, year)
     zodiac = DateTime.new(year, month, date).zodiac_sign.to_s
     return zodiac
@@ -40,7 +41,7 @@ module Zodiac
     end
   end
 
-  ##loop system for learn zodiac
+  ##retrieve api data to get the data to be looped
   #require api connection
   def self.learn_zodiac(zodiac, prompt)
     get_zodiac_api(zodiac) ? res = get_zodiac_api(zodiac) : return
@@ -54,17 +55,20 @@ module Zodiac
         break
       elsif (choice == "Famous People who have same Zodiac")
         puts("#{choice} : " + res["famous_people"][0..5].join(",").green + "\n\n")
+        go_on()
       else
         if (res[choice].is_a? String)
           puts("#{choice} : " + res[choice].green + "\n\n")
+          go_on()
         else
           puts("#{choice} : " + res[choice].join(",").green + "\n\n")
+          go_on()
         end
       end
     end
   end
 
-  ##method to match zodiac
+  ##method to match zodiac with another input
   def self.match_zodiac(zodiac, prompt)
     puts("Enter Partner Zodiac")
     date, month, year = self.get_user_dob(prompt)

@@ -28,6 +28,7 @@ module Utility
   end
 end
 
+#return emoji syntax
 def emoji(sign)
   emoji = { aries: ":aries:",
             taurus: ":taurus:",
@@ -45,7 +46,15 @@ def emoji(sign)
   return emoji[sign]
 end
 
+#return array of all zodiax
 def get_all_zodiac
   return %w( Aries Taurus Gemini Cancer Leo Virgo Libra Scorpio Sagittarius Capricorn
              Aquarius Pisces )
+end
+
+# display to continue message and wait till user enter any key before continue
+def go_on
+  print "press any key to continue".magenta
+  STDIN.getch
+  print "            \r" # extra space to overwrite in case next sentence is short
 end

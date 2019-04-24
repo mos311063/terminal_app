@@ -1,6 +1,7 @@
 #api.rb
 
-##method for api connection
+##method for calling api data and establish connection
+#require httparty
 def get_zodiac_api(zodiac)
   begin
     url = "https://zodiacal.herokuapp.com/#{zodiac}"
