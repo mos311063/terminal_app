@@ -1,5 +1,4 @@
 #module.rb
-
 module Zodiac
 
   ##take date,month,year as arg and return western zodiac(String)
@@ -47,16 +46,36 @@ module Zodiac
     get_zodiac_api(zodiac) ? res = get_zodiac_api(zodiac) : return
     choice = ""
     while (choice != "back")
-      choice = prompt.select("Learn?".blue, %w(famous_people how_to_spot secret_wish chinese_zodiac back))
-      if (choice == "chinese_zodiac")
-        result = Zodiac::get_czodiac(year)
-        puts("\n#{choice} : " + result.yellow)
-      elsif (choice == "back")
+      sel = ["Famous People who have same Zodiac",
+             "how_to_spot", "secret_wish", "hates", "good_traits",
+             "bad_traits", "favorites", "compatibility", "element", "back"]
+      choice = prompt.select("Learn?".blue, sel)
+      if (choice == "back")
         break
+      elsif (choice == "Famous People who have same Zodiac")
+        puts("#{choice} : " + res["famous_people"][0..5].join(",").green + "\n\n")
       else
-        puts("\n#{choice} : " + res[0][choice].join(",").green)
+        if (res[choice].is_a? String)
+          puts("#{choice} : " + res[choice].green + "\n\n")
+        else
+          puts("#{choice} : " + res[choice].join(",").green + "\n\n")
+        end
       end
     end
+  end
+
+  def self.match_zodiac(zodiac, prompt)
+    puts("Enter Partner Zodiac")
+    date, month, year = self.get_user_dob(prompt)
+    zodiac_partner = Zodiac::get_wzodiac(date, month, year)
+    res = get_zodiac_api(zodiac)
+    res["compatibility"].each { |zodiac_com|
+      if (zodiac_partner == zodiac_com.strip())
+        puts("You are compatible!!!".yellow)
+        return
+      end
+    }
+    puts("You are not compatible!!!".red)
   end
 end
 

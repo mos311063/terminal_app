@@ -8,13 +8,21 @@ date, month, year = Zodiac::get_user_dob(prompt) # this method prompt user and r
 zodiac = Zodiac::get_wzodiac(date, month, year)
 puts(Utility::random_color("\nYour Zodiac is ") + Utility::random_color(zodiac).underline.bold)
 
-puts("\nWhat whould you like to know about your zodiac")
 choice = ""
+
 while (choice != "quit")
-  choice = prompt.select("\nPlease Select?".yellow, %w( Learn Horoscope quit ))
+  choice = prompt.select("\nWhat whould you like to know about your " +
+                         "#{zodiac}".green + "\nPlease select?".blue,
+                         %w( Learn MatchZodiac Horoscope ChineseZodiac quit ))
   case choice
   when "Learn"
     Zodiac::learn_zodiac(zodiac, prompt)
+  when "MatchZodiac"
+    Zodiac::match_zodiac(zodiac, prompt)
+  when "Horoscope"
+    puts("Coming Soon")
+  when "ChineseZodiac"
+    puts("Chinese Zodiac : " + Zodiac::get_czodiac(year).yellow)
   when "quit"
     break
   end
