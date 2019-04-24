@@ -1,5 +1,14 @@
 #module.rb
+
 module Zodiac
+
+  ##take date,month,year as arg and return western zodiac(String)
+  def self.get_wzodiac(date, month, year)
+    zodiac = DateTime.new(year, month, date).zodiac_sign.to_s
+    return zodiac
+  end
+
+  ##take year as arg and return chinese zodiac(String)
   def self.get_czodiac(year)
     chinese = [[1909, "Rooster"], [1910, "Dog"],
                [1911, "Pig"], [1912, "Rat"],
@@ -17,16 +26,64 @@ module Zodiac
     }
   end
 
-  def self.get_user_dob()
-    puts("Enter Date of birth (eg. 23/09/1994)")
-    user_dob = gets().strip
-    arr = user_dob.split("/")
-    arr = arr.map { |x| x = x.to_i }
-    return arr[0], arr[1], arr[2]
+  ##prompt user and return date month and year respectively
+  def self.get_user_dob(prompt)
+    x = true
+    while (x)
+      begin
+        x = false
+        user_dob = prompt.ask("Enter Date of birth (eg. 23/09/1994)", convert: :date)
+      rescue
+        puts("Error".red.bold.underline + " Please Enter valid Date format (eg.01/12/2012)\n\n".light_red)
+        x = true
+      end
+    end
+    return user_dob.strftime("%d").to_i, user_dob.strftime("%m").to_i, user_dob.strftime("%Y").to_i
   end
 
-  def self.get_wzodiac(date, month, year)
-    zodiac = DateTime.new(year, month, date).zodiac_sign.to_s
-    return zodiac
+  ##loop system for learn zodiac
+  #require api connection
+  def self.learn_zodiac(zodiac, prompt)
+    get_zodiac_api(zodiac) ? res = get_zodiac_api(zodiac) : return
+    choice = ""
+    while (choice != "back")
+      choice = prompt.select("Learn?".blue, %w(famous_people how_to_spot secret_wish chinese_zodiac back))
+      if (choice == "chinese_zodiac")
+        result = Zodiac::get_czodiac(year)
+        puts("\n#{choice} : " + result.yellow)
+      elsif (choice == "back")
+        break
+      else
+        puts("\n#{choice} : " + res[0][choice].join(",").green)
+      end
+    end
+  end
+end
+
+module Utility
+
+  ##take string as arg and return random color of that string
+  def self.random_color(string)
+    arr = string.split("")
+    arr.map! { |str|
+      num = Random.rand(1...6)
+      case num
+      when 1
+        str = str.red
+      when 2
+        str = str.light_blue
+      when 3
+        str = str.green
+      when 4
+        str = str.magenta
+      when 5
+        str = str.yellow
+      when 6
+        str = str.cyan
+      when 7
+        str = str.light_green
+      end
+    }
+    return arr.join("")
   end
 end
