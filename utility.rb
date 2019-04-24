@@ -37,7 +37,7 @@ def emoji(sign)
             leo: ":leo:",
             virgo: ":virgo:",
             libra: ":libra:",
-            scorpio: ":scorpio:",
+            scorpio: ":ant:",
             sagittarius: ":sagittarius:",
             capricorn: ":capricorn:",
             aquarius: ":aquarius:",

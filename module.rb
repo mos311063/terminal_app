@@ -28,16 +28,12 @@ module Zodiac
 
   ##prompt user and return date month and year respectively
   def self.get_user_dob(prompt)
-    x = true
-    while (x)
-      begin
-        x = false
-        user_dob = prompt.ask("Enter Date of birth (eg. 23/09/1994)", convert: :date)
-        return user_dob.strftime("%d").to_i, user_dob.strftime("%m").to_i, user_dob.strftime("%Y").to_i
-      rescue
-        puts("Error".red.bold.underline + " Please Enter valid Date format (eg.01/12/2012)\n\n".light_red)
-        x = true
-      end
+    begin
+      user_dob = prompt.ask("Enter Date of birth (eg. 23/09/1994)", convert: :date)
+      return user_dob.strftime("%d").to_i, user_dob.strftime("%m").to_i, user_dob.strftime("%Y").to_i
+    rescue
+      puts("Error".red.bold.underline + " Please Enter valid Date format (eg.01/12/2012)\n\n".light_red)
+      Zodiac::get_user_dob(prompt)
     end
   end
 
