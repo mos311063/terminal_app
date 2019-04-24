@@ -32,12 +32,12 @@ module Zodiac
       begin
         x = false
         user_dob = prompt.ask("Enter Date of birth (eg. 23/09/1994)", convert: :date)
+        return user_dob.strftime("%d").to_i, user_dob.strftime("%m").to_i, user_dob.strftime("%Y").to_i
       rescue
         puts("Error".red.bold.underline + " Please Enter valid Date format (eg.01/12/2012)\n\n".light_red)
         x = true
       end
     end
-    return user_dob.strftime("%d").to_i, user_dob.strftime("%m").to_i, user_dob.strftime("%Y").to_i
   end
 
   ##loop system for learn zodiac
@@ -48,7 +48,7 @@ module Zodiac
     while (choice != "back")
       sel = ["Famous People who have same Zodiac",
              "how_to_spot", "secret_wish", "hates", "good_traits",
-             "bad_traits", "favorites", "compatibility", "element", "back"]
+             "bad_traits", "favorites", "compatibility", "element", "sun_dates", "back"]
       choice = prompt.select("Learn?".blue, sel)
       if (choice == "back")
         break
@@ -64,6 +64,7 @@ module Zodiac
     end
   end
 
+  ##method to match zodiac
   def self.match_zodiac(zodiac, prompt)
     puts("Enter Partner Zodiac")
     date, month, year = self.get_user_dob(prompt)
@@ -77,32 +78,11 @@ module Zodiac
     }
     puts("You are not compatible!!!".red)
   end
-end
 
-module Utility
-
-  ##take string as arg and return random color of that string
-  def self.random_color(string)
-    arr = string.split("")
-    arr.map! { |str|
-      num = Random.rand(1...6)
-      case num
-      when 1
-        str = str.red
-      when 2
-        str = str.light_blue
-      when 3
-        str = str.green
-      when 4
-        str = str.magenta
-      when 5
-        str = str.yellow
-      when 6
-        str = str.cyan
-      when 7
-        str = str.light_green
-      end
-    }
-    return arr.join("")
+  ##method to change current zodiac
+  def self.change_zodiac(prompt)
+    sel = get_all_zodiac()
+    choice = prompt.select("Change to".magenta, sel)
+    return choice.to_s
   end
 end

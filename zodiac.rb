@@ -1,5 +1,5 @@
 #Zodiac.rb
-%w{colorize zodiac httparty tty-prompt ./api.rb ./module.rb ruby_emoji}.each { |x| require x }
+%w{colorize zodiac httparty tty-prompt ./api.rb ./module.rb ./utility.rb ruby_emoji}.each { |x| require x }
 
 prompt = TTY::Prompt.new    #initiate tty-prompt class
 
@@ -14,16 +14,18 @@ while (choice != "quit")
                          RubyEmoji.parse("#{emoji(zodiac.downcase.to_sym)}").yellow + " " +
                          "#{zodiac}".green + " " + RubyEmoji.parse("#{emoji(zodiac.downcase.to_sym)}").yellow +
                          +"\nPlease select?".blue,
-                         %w( Learn MatchZodiac Horoscope ChineseZodiac quit ))
+                         ["Learn", "Match Zodiac", "Horoscope", "Chinese Zodiac", "Learn Other Zodiac", "quit"])
   case choice
   when "Learn"
     Zodiac::learn_zodiac(zodiac, prompt)
-  when "MatchZodiac"
+  when "Match Zodiac"
     Zodiac::match_zodiac(zodiac, prompt)
   when "Horoscope"
-    puts("Coming Soon")
-  when "ChineseZodiac"
+    puts("Coming Soon".cyan)
+  when "Chinese Zodiac"
     puts("Chinese Zodiac : " + Zodiac::get_czodiac(year).yellow)
+  when "Learn Other Zodiac"
+    zodiac = Zodiac::change_zodiac(prompt)
   when "quit"
     system "clear"
     break
