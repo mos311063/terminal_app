@@ -43,10 +43,11 @@ if valid date is enter the terminal will ask user to select what they want to do
 
 ### User stories
 
-some user stories..
-As a user, I put a date of birth in any of this format [dd/mm/yyyy , dd.mm.yyyy , yyyy-mm-dd]
-As a user, I can change zodiac I want to know about
-As a user, I can find if the spefic date is matchs with me
+<p>some user stories..</p>
+
+- As a user, I put a date of birth in any of this format [dd/mm/yyyy , dd.mm.yyyy , yyyy-mm-dd]
+- As a user, I can change zodiac I want to know about
+- As a user, I can find if the spefic date is matchs with me
 
 ### Time management
 
