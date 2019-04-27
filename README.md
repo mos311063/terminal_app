@@ -35,17 +35,24 @@ From the main menu, run Ruby zodiac.rb
 Enter the date of birth
 format accept are [dd/mm/yyyy , dd.mm.yyyy , yyyy-mm-dd]
 
-![trello](./images/first_sc.png)
+![trello](../docs/first_sc.png)
 
 if valid date is enter the terminal will ask user to select what they want to do
 
-![trello](./images/second_sc.png)
+![trello](../docs/second_sc.png)
+
+### User stories
+
+some user stories..
+As a user, I put a date of birth in any of this format [dd/mm/yyyy , dd.mm.yyyy , yyyy-mm-dd]
+As a user, I can change zodiac I want to know about
+As a user, I can find if the spefic date is matchs with me
 
 ### Time management
 
 we use trello to hep us define the features flow and logic to boost the performance in an organised way and systematic manner
 
-![trello](./images/trello.png)
+![trello](../docs/trello.png)
 
 ## Project Plan & TimeLine
 
